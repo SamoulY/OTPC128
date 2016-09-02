@@ -1,0 +1,11 @@
+<?php
+if($uargs{0}!='/') $uargs = $pwd.'/'.$uargs;
+$uargs = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $uargs);
+$parts = array_filter(explode(DIRECTORY_SEPARATOR, $uargs), 'strlen');
+$absolutes = array();
+foreach ($parts as $part) {
+	if ('.' == $part) continue;
+	if ('..' == $part) array_pop($absolutes);
+	else $absolutes[] = $part;
+}
+$spwd='/'.implode(DIRECTORY_SEPARATOR, $absolutes);

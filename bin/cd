@@ -1,0 +1,6 @@
+<?php
+if (!$uargs||$uargs=='') $uargs='/home/'.$user;
+include('./lib/spwd');
+if (!file_exists('.'.$spwd)) echo 'CD: "'.$spwd.'": File or directory doesn\'t exists.<br>';
+elseif (!is_dir('.'.$spwd)) echo 'CD: "'.$spwd.'": Is not directory.<br>';
+else file_put_contents('./home/'.$user.'/tmp/pwd', ($pwd=$spwd));

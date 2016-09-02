@@ -1,0 +1,12 @@
+<?php
+function rmdirs($file) {
+	if (!file_exists($file)) return false;
+	if (is_dir($file) && $handle = opendir($file)) {
+		while (false !== ($entry = readdir($handle)))
+			if ($entry != '.' && $entry != '..')
+				rmdirs($file.'/'.$entry);
+		closedir($handle);
+		rmdir($file);
+	} elseif (!is_dir($file))
+		unlink($file);
+}

@@ -1,0 +1,33 @@
+<?php
+if (!$uargs||$uargs=='') {
+	echo 'SSH: use: ssh -a Adress -p Password<br>Type "ssh -h" for more info.<br>';
+} elseif ($uargs=='-h') {
+	echo '<br>SSH: it\'s a protocol for connecting to remote shell.<br><br>use:<br> ssh -a Adress -p Password -s Script<br>example:<br> ssh -a 38.83.122.265 -p inwertoo -s /home/script.sh<br><br>';
+} elseif ($uargs=='-a 38.83.122.265 -p inwertoo') {
+	echo 'Establishing connection...<br>Connecting sucsessful.<br>';
+	file_put_contents('./home/'.$user.'/tmp/pwd', '/');
+	file_put_contents('./home/'.$user.'/tmp/user', 'root');
+	file_put_contents('./home/'.$user.'/tmp/host', '38.83.122.265');
+	file_put_contents('./home/'.$user.'/tmp/reset', '1');
+} elseif($uargs=='-a 38.83.122.265 -p inwertoo -s /root/sh/38.83.122.265/ssh.sh') {
+echo ' 
+Uploading files...<br>
+<sys>Done.</sys><br>
+Unpacking files...<br>
+<sys>Done.</sys><br>
+Starting \'install\'...<br>
+Checking for conflists...<br>
+Conflicts not foun.d<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+.<br>
+<sys>Done.</sys><br>
+Reconnecting...<br>';
+} else echo 'SSH: Connection error.<br>Type "ssh -h" for more info.<br>';
