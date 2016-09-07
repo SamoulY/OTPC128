@@ -11,7 +11,11 @@ if(@file_get_contents('./home/'.$user.'/tmp/reset')=='1'){
 if (!$pwd=@file_get_contents('./home/'.$user.'/tmp/pwd')) $pwd='/home/'.$user;
 if($cmd) {
 	list($u,$uargs)=explode(' ', $cmd, 2);
-	if(!@file_exists('./bin/'.$u)||strstr($u,'/')) echo 'Command not found: "'.$u.'". Type "help" for a list of commands.<br>';
+	if(strstr($u,'/')){
+		$uargs=$u;
+		include('./bin/ls');
+		include('./bin/cat');
+	}elseif(!@file_exists('./bin/'.$u)) echo 'Command not found: "'.$u.'". Type "help" for a list of commands.<br>';
 	else {include('./bin/'.$u);}
 }
 

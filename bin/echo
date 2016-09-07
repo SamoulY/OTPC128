@@ -1,0 +1,5 @@
+<?php
+include('./lib/html');
+if(!$uargs||$uargs=='') echo '<br>';
+elseif(!isset(${$uargs})) echo 'ECHO: "'.$uargs.'" is not set.';
+else echo htmlprepare(${$uargs});

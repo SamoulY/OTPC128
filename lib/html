@@ -1,0 +1,4 @@
+<?php
+function htmlprepare($txt) {
+	return str_replace(array("\n",' ',"\t"),array('<br>','&nbsp;','&nbsp;&nbsp;&nbsp;&nbsp;'),htmlspecialchars($txt));
+}
