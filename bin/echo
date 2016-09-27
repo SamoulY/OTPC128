@@ -1,5 +1,11 @@
 <?php
-include('./lib/html');
-if(!$uargs||$uargs=='') echo '<br>';
-elseif(!isset(${$uargs})) echo 'ECHO: "'.$uargs.'" is not set.';
-else echo htmlprepare(${$uargs});
+if(!$uargs||$uargs=='')
+	$uargs='GLOBALS';
+if(!isset(${$uargs}))
+	echo 'ECHO: "'.htmlprepare($uargs).'" is not set.<br>';
+elseif(is_array(${$uargs})) {
+	foreach(${$uargs} as $var => $value)
+		echo htmlprepare($var).'&nbsp;&nbsp;&nbsp;';
+	echo '<br>';
+} else
+	echo '$'.htmlprepare($uargs).' = "'.htmlprepare(${$uargs}).'"<br>';

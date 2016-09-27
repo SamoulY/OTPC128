@@ -1,6 +1,7 @@
 <?php
 if ($handle = opendir('./bin/')) {
-	while (false !== ($entry = readdir($handle))) if ($entry != '.' && $entry != '..') echo $entry.'&nbsp;&nbsp;&nbsp;';
+	while (false !== ($entry = readdir($handle))) if ($entry != '.' && $entry != '..')
+		echo '<a href="#" onclick="document.getElementById(\'cmd\').value=\''.$entry.'\';document.getElementById(\'textarea\').onkeydown(13);return false;">'.htmlprepare($entry).'</a>&nbsp;&nbsp; ';
 	closedir($handle);
 }
 echo '<br>';

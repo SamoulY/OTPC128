@@ -1,2 +1,2 @@
 <?php
-echo $pwd.'<br>';
+echo htmlprepare($pwd).'<br>';

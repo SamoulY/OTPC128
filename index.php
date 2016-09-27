@@ -1,8 +1,10 @@
 <?php
-include('./lib/rmdirs');
 if (!$user=$_COOKIE['user'])
-	$user=rand(11111, 99999);
+	do{
+		$user=rand(11111, 99999);
+	}while(file_exists('./home/'.$user));
 setcookie('user', $user, time()+3600000);
+include('./lib/rmdirs');
 rmdirs('./home/'.$user.'/tmp');
 mkdir('./home/'.$user.'/tmp', 0777, 1);
 file_put_contents('./home/'.$user.'/tmp/pwd', '/home/'.$user);
@@ -14,6 +16,7 @@ file_put_contents('./home/'.$user.'/tmp/pwd', '/home/'.$user);
 body{overflow:hidden;font-weight:500;color:#ddd;background:#000}
 .sys, sys{color:#082;display: inline} .sys a, sys a{color:#082}
 .red, red{color:#802;display: inline} .red a, red a{color:#802}
+.blu, blu{color:#55c;display: inline} .blu a, blu a{color:#55c}
 a{color:#888; position: relative; z-index: 600}
 .cursor{margin-left:-11px;animation:cursor 800ms steps(2,start) 0s infinite}
 @keyframes cursor{80%{visibility:hidden}}
@@ -54,22 +57,20 @@ if(d3.getHours()<10)
 
 <div class="display-layer">
 [remote host]<br>
-<div class="str1 s"><sys><b>[<script type="text/javascript">document.write(t1)</script>] <?=$_SERVER['REMOTE_ADDR']?></b> joined the session.</sys></div><br>
-<div class="str2 s"><sys><b>[<script type="text/javascript">document.write(t1)</script>][system]</b>:</sys> Initialising user <b><?=$user?></b>... <sys>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>[&nbsp;&nbsp;OK&nbsp;&nbsp;]</b></sys></div><br>
-<div class="str3 s"><sys><b>[<script type="text/javascript">document.write(t2)</script>][system]</b>:</sys> Checking cookies...</div><br>
-<div class="str4 s"><sys><b>[<script type="text/javascript">document.write(t3)</script>][system]</b>:</sys> Someone's destructed your data. Set password using "passwd" to get private.</div><br>
+<div class="str1 s"><sys><b>[<script>document.write(t1)</script>] <?=$_SERVER['REMOTE_ADDR']?></b> joined the session.</sys></div><br>
+<div class="str2 s"><sys><b>[<script>document.write(t1)</script>][system]</b>:</sys> Initialising user <b><?=$user?></b>... <sys>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>[&nbsp;&nbsp;OK&nbsp;&nbsp;]</b></sys></div><br>
+<div class="str3 s"><sys><b>[<script>document.write(t2)</script>][system]</b>:</sys> Checking cookies...</div><br>
+<div class="str4 s"><sys><b>[<script>document.write(t3)</script>][system]</b>:</sys> Someone's destructed your data. Set password using "passwd" to get private.</div><br>
 <div id="timeparadox"><sys><b>[undfined][system]</b>:</sys> TIME PARADOX! <b>Restarting system</b>...</div><br>
-<div class="str5 s"><div id="s" class="s"><b><?=$user?>@otpc128:~#</b> </div><input type="text" id="cmd" size="1"><div class="cursor s">_</div></div>
+<div class="str5 s"><div id="s" class="s"><b><sys><?=$user?>@otpc128</sys>:~#</b> </div><input type="text" id="cmd" size="1"><div class="cursor s">_</div></div>
 </div>
 
 <div class="input-layer">
 <textarea autofocus id="textarea" class="str4" onblur="this.focus()" onkeyup="onkeydown()" onkeypress="onkeydown()" onchange="onkeydown()"
 onkeydown="
 cmd=getElementById('cmd');
-if(cmd.value.length<80)
-	cmd.value+=this.value;
-else if(this.value)
-	getElementById('beep').play();
+if(cmd.value.length<80) cmd.value+=this.value;
+else if(this.value) getElementById('beep').play();
 cmd.size=cmd.value.length+1||1;
 this.value='';
 if(event.keyCode=='13'){
@@ -96,8 +97,9 @@ if(event.keyCode=='13'){
 	xd.send();
 	cmd.value='';
 	cmd.type='text';
-}else if(event.keyCode=='8')
+}else if(event.keyCode=='8'){
 	cmd.value=cmd.value.substring(0, cmd.value.length-1)
+}
 cmd.scrollIntoView();
 "></textarea>
 </div>

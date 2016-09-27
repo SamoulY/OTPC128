@@ -1,6 +1,5 @@
 <?php
 include('./lib/spwd');
-include('./lib/html');
-if (!$uargs||$uargs==''||!file_exists('.'.$spwd)) echo 'CAT: "'.$spwd.'": File or directory doesn\'t exists.<br>';
-elseif (is_dir('.'.$spwd)) echo 'CAT: "'.$spwd.'": Is not file.<br>';
-else echo htmlprepare(file_get_contents('.'.$spwd));
+if (!$uargs||$uargs==''||!file_exists('.'.$spwd)) echo 'CAT: "'.htmlprepare($spwd).'": File or directory doesn\'t exists.<br>';
+elseif (is_dir('.'.$spwd)) echo 'CAT: "'.htmlprepare($spwd).'": Is not file.<br>';
+else echo htmlprepare(file_get_contents('.'.$spwd)).'<br>';

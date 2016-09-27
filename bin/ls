@@ -1,11 +1,13 @@
 <?php
 include('./lib/spwd');
 if (!$uargs||$uargs=='') $spwd=$pwd;
-if (!file_exists('.'.$spwd)) echo 'LS: "'.$spwd.'": File or directory doesn\'t exists.<br>';
-elseif (!is_dir('.'.$spwd)) echo 'LS: "'.$spwd.'": Is not directory.<br>';
+if (!file_exists('.'.$spwd)) echo 'LS: "'.htmlprepare($spwd).'": File or directory doesn\'t exists.<br>';
+elseif (!is_dir('.'.$spwd)) echo 'LS: "'.htmlprepare($spwd).'": Is not directory.<br>';
 else {
 	if ($handle = opendir('.'.$spwd)) {
-		while (false !== ($entry = readdir($handle))) if ($entry != '.' && $entry != '..') echo $entry.'&nbsp;&nbsp;&nbsp;';
+		while (false !== ($entry = readdir($handle)))
+			if ($entry != '.' && $entry != '..')
+				echo htmlprepare($entry).'&nbsp;&nbsp; ';
 		closedir($handle);
 	}
 	echo '<br>';
