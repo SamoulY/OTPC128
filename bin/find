@@ -1,0 +1,16 @@
+<?php
+function find($start, $find=false) {
+	$start=rtrim($start,'/').'/';
+	if ($handle = opendir($start)) {
+		while (false !== ($entry = readdir($handle)))
+			if ($entry != '.' && $entry != '..') {
+				if ($entry == $find || !$find)
+					echo ltrim($start.$entry, '.').'&nbsp;&nbsp; ';
+				if (is_dir($start.$entry))
+					find($start.$entry, $find);
+				}	
+		closedir($handle);
+	}
+}
+$find=find('.'.$pwd, $uargs);
+echo '<br>';

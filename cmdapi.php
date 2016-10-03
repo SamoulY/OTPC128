@@ -13,7 +13,7 @@ if($cmd){
 		$uargs=$u;
 		include('./bin/cat');
 	}elseif(!file_exists('./bin/'.$u))
-		echo 'Command not found: "'.$u.'". Type "help" for a list of commands.<br>';
+		echo 'Command not found: "'.htmlprepare($u).'". Type "<a href="#" onclick="document.getElementById(\'cmd\').value=\'help\';document.getElementById(\'textarea\').onkeydown();return false">help</a>" for a list of commands.<br>';
 	elseif(file_get_contents('./bin/'.$u)=='')
 		echo 'Not improved yet :( You can help: <a href="https://github.com/z56/cmd/" target="_blank">https://github.com/z56/cmd/</a><br>';
 	else{
