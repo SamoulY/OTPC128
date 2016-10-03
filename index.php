@@ -38,9 +38,6 @@ a{color:#888; position: relative; z-index: 600}
 .bottom-bar a{color:#fff;text-decoration:none}
 </style>
 <script type="text/javascript">
-document.write("<link rel='prefetch' href='//counter.yadro.ru/hit?q;t45.5;r"+escape(document.referrer)+((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";"+Math.random()+"'>")
-</script>
-<script type="text/javascript">
 d1=new Date();
 t1=d1.toLocaleTimeString();
 if(d1.getHours()<10)
